@@ -1,0 +1,43 @@
+﻿@model CheckInViewModel;
+@{
+    Layout = "_AdminLayout";
+}
+
+<div class="container border rounded p-2">
+
+    <div class="container border p-5 rounded">
+        <h3>Customer list of next day trip</h3><hr />
+        <form asp-controller="Admin" asp-action="EmailBefore1Day" method="post">
+            <table class="table table-striped table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">Customer Name</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">Package Title</th>
+                        <th scope="col">Location</th>
+                        <th scope="col">Start Date</th>
+                        <th scope="col">Start Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < Model.AllCheckIn.Count; i++)
+                    {
+                        <tr>
+                            <td> @Model.AllCheckIn[i].CustomerName </td>
+                            <td> @Model.AllCheckIn[i].Email </td>
+                            <td> @Model.AllCheckIn[i].PackageTitle </td>
+                            <td> @Model.AllCheckIn[i].EndDate </td>
+                            <td> @Model.AllCheckIn[i].StartDate </td>
+                            <td> @Model.AllCheckIn[i].StartTime </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </form>
+    </div>
+
+</div>
+<br />
+<br />
+<br />
+<br />

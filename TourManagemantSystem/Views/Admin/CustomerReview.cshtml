@@ -1,0 +1,35 @@
+﻿@model ReviewCustomerViewModel;
+@{
+    Layout = "_AdminLayout";
+}
+
+<div class="container border rounded p-2">
+
+    <div class="container border p-5 rounded">
+        <h3>Send Review Email</h3><hr />
+        <table class="table table-striped table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">Package Title</th>
+                    <th scope="col">Customer Name</th>
+                    <th scope="col">Review</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.AllReviewCustomer.Count; i++)
+                {
+                    <tr>
+                        <th scope="row"> @Model.AllReviewCustomer[i].PackageTitle </th>
+                        <td> @Model.AllReviewCustomer[i].UserName </td>
+                        <td> @Model.AllReviewCustomer[i].Location </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>
+<br />
+<br />
+<br />
+<br />

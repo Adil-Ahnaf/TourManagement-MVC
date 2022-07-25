@@ -1,0 +1,59 @@
+﻿@model ReviewCustomerViewModel
+@{
+    Layout = "_AdminLayout";
+}
+
+
+<div class="container border rounded p-2">
+
+    <div class="container border p-5 rounded">
+        <h3>Send Review Email</h3><hr />
+        <table class="table table-striped table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">Review Id</th>
+                    <th scope="col">Registration Id</th>
+                    <th scope="col">Customer Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Package Title</th>
+                    <th scope="col">Location</th>
+
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.AllReviewCustomer.Count; i++)
+                {
+                    <tr>
+                        <th scope="row"> @Model.AllReviewCustomer[i].ReviewId </th>
+                        <td> @Model.AllReviewCustomer[i].RegistrationId </td>
+                        <td> @Model.AllReviewCustomer[i].UserName </td>
+                        <td> @Model.AllReviewCustomer[i].Email </td>
+                        <td> @Model.AllReviewCustomer[i].PackageTitle </td>
+                        <td> @Model.AllReviewCustomer[i].Location </td>
+
+
+                        <td>
+                            <a type="button" class="btn btn-warning btn-sm"
+                               asp-controller="Admin"
+                               asp-action="ReviewEmail"
+                               asp-route-ReviewId="@Model.AllReviewCustomer[i].ReviewId"
+                               asp-route-RegId="@Model.AllReviewCustomer[i].RegistrationId"
+                               asp-route-Email="@Model.AllReviewCustomer[i].Email"
+                               asp-route-PackageTitle="@Model.AllReviewCustomer[i].PackageTitle"
+                               asp-route-Location="@Model.AllReviewCustomer[i].Location">Send Email</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>
+<br />
+<br />
+<br />
+<br />
+
+
+

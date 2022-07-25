@@ -1,0 +1,52 @@
+﻿@model RegisterPackageViewModel
+
+
+<div class="container border p-5">
+    <h3>Trip Cancellation</h3><hr />
+    <form method="post" asp-controller="Registration" asp-action="RemoveRegistration" asp-route-registrationId="@Model.AllRegisterPackage[0].RegId" novalidate>
+        <!-- 2 column grid layout with text inputs for the first and last names -->
+        <!-- Email input -->
+        <div class="form-outline mb-4">
+            <label class="form-label" for="form3Example3">Package Title</label>
+            <input type="text" class="form-control" value="@Model.AllRegisterPackage[0].PackageTitle" disabled/>
+
+        </div>
+
+        <!-- Email input -->
+        <div class="form-outline mb-4">
+            <label class="form-label" for="form3Example3">Location</label>
+            <input type="text" class="form-control" value="@Model.AllRegisterPackage[0].Location" disabled/>
+
+        </div>
+
+        <!-- Password input -->
+        <div class="form-outline mb-4">
+            <label class="form-label" for="form3Example4">Price</label>
+            <input type="text" class="form-control" value="@Model.AllRegisterPackage[0].Price" disabled/>
+
+        </div>
+
+        <div class="row mb-4">
+            <div class="col">
+                <div class="form-outline">
+                    <label class="form-label" for="form3Example1">Refund </label>
+                    <span class="text-primary">(100% refund within 24 hour cancel trip)</span>
+                    <input type="text" class="form-control" value="@ViewBag.Refund" disabled/>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-outline">
+                    <label class="form-label" for="form3Example2">Fine </label>
+                    <span class="text-primary">(10% fine will bd charged after 24 hour)</span>
+                    <input type="text"  class="form-control" value="@ViewBag.Fine" disabled/>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Submit button -->
+        <button type="submit" class="btn btn-danger btn-sm mb-4">Delete Confirm</button>
+        <button class="btn btn-primary btn-sm mb-4" asp-controller="Customer" asp-action="Index">Cancel</button>
+
+    </form>
+</div>

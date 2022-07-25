@@ -1,0 +1,36 @@
+﻿@model ReviewViewModel
+
+<div class="container border rounded p-1">
+
+    <div class="container border p-5">
+        <h4>Please! Submit Your Honest Review</h4><hr />
+        <form method="post" asp-controller="Admin" asp-action="SubmitReview">
+            <!-- Name input -->
+            <div class="form-outline mb-4">
+                <label class="form-label">Package Title</label>           
+                <input hidden type="text" class="form-control" asp-for="RegId" value="@ViewBag.RegId" />
+                <input type="text" class="form-control" value="@ViewBag.PackageTitle" />
+
+            </div>
+
+            <!-- Email input -->
+            <div class="form-outline mb-4">
+                <label class="form-label">Location</label>
+                <input type="text" class="form-control" value="@ViewBag.Location"/>
+
+            </div>
+
+            <!-- Message input -->
+            <div class="form-outline mb-4">
+                <label class="form-label">Review</label>
+                <textarea class="form-control" rows="4" asp-for="Review"></textarea>
+
+            </div>
+
+
+            <!-- Submit button -->
+            <button type="submit" class="btn btn-success mb-4">Submit Review</button>
+        </form>
+    </div>
+
+</div>

@@ -1,0 +1,51 @@
+﻿@model CheckInViewModel;
+@{
+    Layout = "_AdminLayout";
+ }
+
+
+    <div class="container border p-5 rounded">
+        <h3>Send First CheckIn Email</h3><hr />
+        <table class="table table-striped table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">Customer Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Package Title</th>
+                    <th scope="col">Start Date</th>
+                    <th scope="col">Start Time</th>
+                    <th scope="col">End Date</th>
+                    <th scope="col">End Time</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.AllCheckIn.Count; i++)
+                {
+                    <tr>
+                        <th scope="row"> @Model.AllCheckIn[i].CustomerName </th>
+                        <td> @Model.AllCheckIn[i].Email </td>
+                        <td> @Model.AllCheckIn[i].PackageTitle </td>
+                        <td> @Model.AllCheckIn[i].StartDate </td>
+                        <td> @Model.AllCheckIn[i].StartTime </td>
+                        <td> @Model.AllCheckIn[i].EndDate </td>
+                        <td> @Model.AllCheckIn[i].EndTime </td>
+
+                        <td>
+                            <a type="button" class="btn btn-warning btn-sm"
+                               asp-controller="Admin"
+                               asp-action="EmailBefore3Day"
+                               asp-route-customerName="@Model.AllCheckIn[i].CustomerName"
+                               asp-route-customerEmail="@Model.AllCheckIn[i].Email"
+                               asp-route-registerId="@Model.AllCheckIn[i].RegisterId">Send Email</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+<br /><br /><br /><br />
+
+
+

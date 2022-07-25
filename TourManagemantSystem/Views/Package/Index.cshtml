@@ -1,0 +1,53 @@
+﻿@model PackageViewModel
+
+<div class="container text-center mt-3 mb-5">
+    <h1>Welcome To Our Dream Tour Packages</h1>
+    @if (ViewBag.Message != null)
+    {
+        <h5 class="text-success" >@ViewBag.Message</h5>
+    }
+</div>
+
+<div class="container border p-5 rounded">
+    <form method="post" asp-controller="Package" asp-action="Export">
+        <input type="submit" value="Export" />
+    </form>
+    <h3>Avaliable Packages</h3> 
+    <hr />
+    <table class="table table-striped table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Title</th>
+                <th scope="col">Description</th>
+                <th scope="col">Location</th>
+                <th scope="col">Price</th>
+                <th scope="col">Seat</th>
+                <th scope="col">Start Date</th>
+                <th scope="col">Start Time</th>
+                <th scope="col">End Date</th>
+                <th scope="col">End Time</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.AllPackage.Count; i++)
+            {
+                <tr>
+                    <th scope="row"> @Model.AllPackage[i].Id </th>
+                    <td> @Model.AllPackage[i].Title </td>
+                    <td> @Model.AllPackage[i].Description </td>
+                    <td> @Model.AllPackage[i].Location </td>
+                    <td> @Model.AllPackage[i].Price </td>
+                    <td> @Model.AllPackage[i].Seat </td>
+                    <td> @Model.AllPackage[i].StartDate </td>
+                    <td> @Model.AllPackage[i].StartTime </td>
+                    <td> @Model.AllPackage[i].EndDate </td>
+                    <td> @Model.AllPackage[i].EndTime </td>
+
+                    <td><a type="button" class="btn btn-success btn-sm" asp-controller="Registration" asp-action="Index" asp-route-packageId="@Model.AllPackage[i].Id" asp-route-packageTitle="@Model.AllPackage[i].Title" asp-route-packagePrice="@Model.AllPackage[i].Price">Register</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div><br /><br /><br /><br /><br /><br />

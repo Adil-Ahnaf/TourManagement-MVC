@@ -1,0 +1,21 @@
+﻿@if (User.Identity.IsAuthenticated)
+{
+    <div style="float:left; padding-top:18px">
+        <p class="text-primary font-weight-bold">@string.Format("Welcome {0}", @User.Identity.Name) </p>
+    </div>
+    <div style="float:left; padding-top:10px">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Customer" asp-action="Index">Profile</a>
+    </div>
+    <div style="float:left; padding-top:10px">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="ChangePassword">Account</a>
+    </div>
+    <div style="float:left; padding-top:10px">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout">Sing Out</a>
+    </div>
+
+}
+else
+{
+    <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login" style="float:left">Sign In</a>
+    <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register" style="float:left">Sign Up</a>
+}

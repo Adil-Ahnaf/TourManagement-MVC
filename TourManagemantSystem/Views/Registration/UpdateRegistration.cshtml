@@ -1,0 +1,53 @@
+﻿@model PackageViewModel
+
+<div class="container text-center mt-3 mb-5">
+    <h1>Welcome To Our Dream Tour Packages</h1>
+    @*@if (ViewBag.Message == "Package Registered Successfully!")
+    {
+        <h5 class="text-success">@ViewBag.Message</h5>
+    }*@
+</div>
+
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Title</th>
+                <th scope="col">Description</th>
+                <th scope="col">Location</th>
+                <th scope="col">Price</th>
+                <th scope="col">Seat</th>
+                <th scope="col">Start Date</th>
+                <th scope="col">Start Time</th>
+                <th scope="col">End Date</th>
+                <th scope="col">End Time</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.AllPackage.Count; i++)
+            {
+                <tr>
+                    <th scope="row"> @Model.AllPackage[i].Id </th>
+                    <td> @Model.AllPackage[i].Title </td>
+                    <td> @Model.AllPackage[i].Description </td>
+                    <td> @Model.AllPackage[i].Location </td>
+                    <td> @Model.AllPackage[i].Price </td>
+                    <td> @Model.AllPackage[i].Seat </td>
+                    <td> @Model.AllPackage[i].StartDate </td>
+                    <td> @Model.AllPackage[i].StartTime </td>
+                    <td> @Model.AllPackage[i].EndDate </td>
+                    <td> @Model.AllPackage[i].EndTime </td>
+
+                    <td><a type="button" class="btn btn-primary" asp-controller="Registration" asp-action="SuccessfullyUpdate" 
+                           asp-route-packageId="@Model.AllPackage[i].Id"
+                           asp-route-packageTitle="@Model.AllPackage[i].Title" 
+                           asp-route-packagePrice="@Model.AllPackage[i].Price"
+                           asp-route-registerId="@ViewBag.Id"
+                           >Change Package</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

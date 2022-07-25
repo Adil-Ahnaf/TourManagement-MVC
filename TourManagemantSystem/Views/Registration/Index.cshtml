@@ -1,0 +1,35 @@
+﻿@model RegistrationViewModel;
+
+        <div class="container text-center mt-3 mb-5">
+            <h1>Please, Fill up the form to register a tour</h1>
+        </div>
+
+        <div class="container mt-5">
+            <div class="row ">
+                <div class="offset-md-4 col-md-4 login-form">
+                    <p style="text-align:center" class="text-danger">@ViewBag.msg</p>
+                    <form asp-controller="Registration" asp-action="SuccessfullyRegistered" method="post" novalidate="novalidate">
+                        <div class="mb-3">
+                            <label class="form-label">Package Title</label>
+                            <input type="hidden" asp-for="PackageId" value="@Model.PackageId" class="form-control" aria-describedby="packageHelp">
+                            <input asp-for="PackageTitle" value="@Model.PackageTitle" class="form-control" aria-describedby="packageHelp" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Customer Name</label>
+                            <input type="text" value="@User.Identity.Name" class="form-control" aria-describedby="customerNameHelp" readonly>
+                            @*<input asp-for="CustomerId" type="hidden" value="userManager.Id" class="form-control" aria-describedby="customerNameHelp">*@
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="Price" class="form-label">Price</label>
+                            <input asp-for="Price" value="@Model.Price" type="number" class="form-control" aria-describedby="priceHelp" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="Payment" class="form-label">Payment</label>
+                            <input asp-for="Payment" type="number" class="form-control" aria-describedby="paymentHelp">
+                        </div>
+                        @*<button style="display: none" asp-route-price="@Model.Price" asp-route-payment="@Model.Payment" ></button>*@
+                       <button class="btn btn-primary" type="submit">Register Package</button>
+                    </form>
+                </div>
+            </div>
+        </div><br /><br /><br />

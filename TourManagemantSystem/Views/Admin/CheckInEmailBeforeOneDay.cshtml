@@ -1,0 +1,161 @@
+﻿@model CheckInViewModel;
+@{
+    Layout = "_AdminLayout";
+}
+
+<div class="container border rounded p-2">
+
+    <div class="container border p-5 rounded">
+        <h3 id="msg" class="text-danger"></h3>
+        <h3>Send First CheckIn Email</h3><hr />
+            <table class="table table-striped table-hover" name="table">
+                <thead class="table-dark">
+                    <tr>
+                        <td><input id="allCheck" type="checkbox"></td>
+                        <th scope="col">Customer Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Package Title</th>
+                        <th scope="col">Start Date</th>
+                        <th scope="col">Start Time</th>
+                        <th scope="col">End Date</th>
+                        <th scope="col">End Time</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < Model.AllCheckIn.Count; i++)
+                    {
+                        <tr>
+                            <td>
+                                @{
+                                    string idName = "check" + i;
+                                }
+                                <input name="locationthemes" id="@idName" class="checkbox" type="checkbox" value=@Model.AllCheckIn[i].RegisterId>
+                            </td>
+                            <th scope="row"> @Model.AllCheckIn[i].CustomerName </th>
+                            <td> @Model.AllCheckIn[i].Email </td>
+                            <td> @Model.AllCheckIn[i].PackageTitle </td>
+                            <td> @Model.AllCheckIn[i].StartDate </td>
+                            <td> @Model.AllCheckIn[i].StartTime </td>
+                            <td> @Model.AllCheckIn[i].EndDate </td>
+                            <td> @Model.AllCheckIn[i].EndTime </td>
+
+                            <td>
+                                <a type="button" class="btn btn-warning btn-sm"
+                                   asp-controller="Admin"
+                                   asp-action="EmailBefore1Day"
+                                   asp-route-customerName="@Model.AllCheckIn[i].CustomerName"
+                                   asp-route-customerEmail="@Model.AllCheckIn[i].Email"
+                                   asp-route-registerId="@Model.AllCheckIn[i].RegisterId">Send Email</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <button class="btn btn-success" id="btn-submit">Send Email</button>
+    </div>
+
+</div>
+<br />
+<br />
+<br />
+<br />
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+
+            var check = true;
+            var regIdArray = [];
+            $('.checkbox').on('click', function () {
+
+                @*for push pop the regId in an array*@
+                if (jQuery.inArray(this.value, regIdArray) != -1) {
+                    @*if this value is in the array it will remove the value*@
+                    regIdArray.splice($.inArray(this.value, regIdArray), 1);
+                } else {
+                    regIdArray.push(this.value);
+                }
+
+                @*console.log(regIdArray);*@
+
+                $(this).toggleClass('selected');
+
+                @*To check and uncheck the checkbox of table header*@
+                if (@Model.AllCheckIn.Count === $('.selected').length) {
+                    $('#allCheck').prop('checked', true);
+                    @*console.log("Total selected class is" + $('.selected').length);*@
+                    check = false;
+                } else
+                {
+                    $('#allCheck').prop('checked', false);
+                    @*console.log("Total selected class is" + $('.selected').length);*@
+                    check = true;
+                }
+            });
+
+            $('#allCheck').on('click', function () {
+                
+                if (check == true) {
+                    $('.checkbox').addClass('selected');
+                    $('.checkbox').prop('checked', true);
+                    check = false;
+                    $('input[name="locationthemes"]:checked').each(function () {
+                       @* regIdArray.push(this.value);*@
+                        if (jQuery.inArray(this.value, regIdArray) == -1) {
+                            @*if this value is in the array it will remove the value *@
+                            regIdArray.push(this.value);
+                        }
+                    });
+                    @*console.log("Total selected class is" + $('.selected').length);*@
+                }
+                else {
+                    $('.checkbox').removeClass('selected');
+                    $('.checkbox').prop('checked', false);
+                    check = true;
+                    regIdArray = [];
+                }
+                @*console.log(regIdArray);*@
+
+            });
+
+
+            $('#btn-submit').click(function () {
+                if (regIdArray.length > 0) {
+                    $.ajax({
+                        url: "/Admin/SendSelectedEmail",
+                        data: { 'regIdArray': regIdArray },
+                        type: "POST",
+                        cache: false,
+                        beforeSend: function ()
+                        {
+                            $('#msg').text("Wait some moment...");
+                        },
+                        success: function () {
+                            $('#msg').text("Email Send Successfully");
+                        },
+                        error: function () {
+
+                        }
+                    });
+                }
+                else {
+                    $('#msg').text("Kindly Check Any To Send Email.");
+                }
+                
+
+               @* $.ajax({
+                    url: /AdminController/SendSelectedEmail,
+                    data: "regIdArray=" + regIdArray,
+                    type: "POST",
+                    success: function (data) {
+                        // code here
+                    },
+                    error: function (passParams) {
+                        // code here
+                    }
+                });*@
+            });
+
+        });
+    </script>
+}
